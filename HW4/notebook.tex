@@ -1,0 +1,1949 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{hw4}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{STA 141B: Homework 4}\label{sta-141b-homework-4}
+
+Winter 2018
+
+    \subsection{Student Information}\label{student-information}
+
+After the colons (in the same line) please write just your first name,
+last name, and the 9 digit student ID number below.
+
+First Name: Dandi
+
+Last Name: Peng
+
+Student ID: 915553480
+
+    \subsection{Instructions}\label{instructions}
+
+We use a script that extracts your answers by looking for cells in
+between the cells containing the exercise statements. So you
+
+\begin{itemize}
+\tightlist
+\item
+  MUST add cells in between the exercise statements and add answers
+  within them and
+\item
+  MUST NOT modify the existing cells, particularly not the problem
+  statement
+\end{itemize}
+
+To make markdown, please switch the cell type to markdown (from code) -
+you can hit 'm' when you are in command mode - and use the markdown
+language. For a brief tutorial see:
+https://daringfireball.net/projects/markdown/syntax
+
+    \subsection{Requesting freshness}\label{requesting-freshness}
+
+In this portion, you'll combine the assignment 3 data set with nutrition
+data from the \href{https://ndb.nal.usda.gov/ndb/search/list}{USDA Food
+Composition Databases}. The CSV file \texttt{fresh.csv} contains the
+fresh fruits and vegetables data you extracted in assignment 3.
+
+The USDA Food Composition Databases have a
+\href{https://ndb.nal.usda.gov/ndb/doc/index}{documented} web API that
+returns data in JSON format . You need a key in order to use the API.
+Only 1000 requests are allowed per hour, so it would be a good idea to
+use \href{https://pypi.python.org/pypi/requests-cache}{caching}.
+
+\href{https://api.data.gov/signup/}{Sign up for an API key here}. The
+key will work with any Data.gov API. You may need the key again later in
+the quarter, so make sure you save it.
+
+These modules may be useful:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{http://docs.python-requests.org/en/master/user/quickstart/}{requests}
+\item
+  \href{https://pypi.python.org/pypi/requests-cache}{requests\_cache}
+\item
+  \href{https://docs.python.org/2/library/urlparse.html}{urlparse}
+\item
+  \href{http://pandas.pydata.org/pandas-docs/stable/}{pandas}
+\end{itemize}
+
+    \textbf{Exercise 1.1} (20 pts)
+
+Read the
+\href{https://ndb.nal.usda.gov/ndb/doc/apilist/API-SEARCH.md}{search
+request documentation}, then write a function called
+\texttt{ndb\_search()} that makes a search request. The function should
+accept the search term as an argument. The function should return the
+search result items as a list (for 0 items, return an empty list).
+
+Note that the search url is:
+\texttt{https://api.nal.usda.gov/ndb/search}
+
+As an example, a search for \texttt{"quail\ eggs"} should return this
+list:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{[\{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'BL'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Branded Food Products Database'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u'CHAOKOH, QUAIL EGG IN BRINE, UPC: 044738074186'}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'45094707'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{0}\NormalTok{\},}
+\NormalTok{ \{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'BL'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Branded Food Products Database'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u'L&W, QUAIL EGGS, UPC: 024072000256'}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'45094890'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{1}\NormalTok{\},}
+\NormalTok{ \{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'BL'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Branded Food Products Database'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u'BUDDHA, QUAIL EGGS IN BRINE, UPC: 761934535098'}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'45099560'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{2}\NormalTok{\},}
+\NormalTok{ \{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'BL'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Branded Food Products Database'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u'GRAN SABANA, QUAIL EGGS, UPC: 819140010103'}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'45169279'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{3}\NormalTok{\},}
+\NormalTok{ \{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'BL'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Branded Food Products Database'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u"D'ARTAGNAN, QUAIL EGGS, UPC: 736622102630"}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'45178254'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{4}\NormalTok{\},}
+\NormalTok{ \{}\StringTok{u'ds'}\NormalTok{: }\StringTok{u'SR'}\NormalTok{,}
+  \StringTok{u'group'}\NormalTok{: }\StringTok{u'Dairy and Egg Products'}\NormalTok{,}
+  \StringTok{u'name'}\NormalTok{: }\StringTok{u'Egg, quail, whole, fresh, raw'}\NormalTok{,}
+  \StringTok{u'ndbno'}\NormalTok{: }\StringTok{u'01140'}\NormalTok{,}
+  \StringTok{u'offset'}\NormalTok{: }\DecValTok{5}\NormalTok{\}]}
+\end{Highlighting}
+\end{Shaded}
+
+As usual, make sure you document and test your function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k+kn}{import} \PY{n+nn}{requests}
+         \PY{k+kn}{import} \PY{n+nn}{requests\PYZus{}cache}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k+kn}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{n}{requests\PYZus{}cache}\PY{o}{.}\PY{n}{install\PYZus{}cache}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food\PYZus{}cache}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{key} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PULS8FJKrLWRW7vDQd2Kez0iewRQUGPvW0VC1gY1}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{food\PYZus{}uri} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://api.nal.usda.gov/ndb/search/?format=json\PYZam{}api\PYZus{}key=\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{key}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{def} \PY{n+nf}{ndb\PYZus{}search}\PY{p}{(}\PY{n}{term}\PY{p}{,} \PY{n}{datasource}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{respon} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{food\PYZus{}uri}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{q}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{term}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{datasource}\PY{p}{,}
+             \PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{res\PYZus{}json} \PY{o}{=} \PY{n}{respon}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{errors}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{res\PYZus{}json}\PY{p}{:}
+                 \PY{n}{res\PYZus{}list} \PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{res\PYZus{}list} \PY{o}{=} \PY{n}{res\PYZus{}json}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{list}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{item}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{k}{return} \PY{n}{res\PYZus{}list}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{ndb\PYZus{}search}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quail eggs}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} [\{'ds': 'BL',
+           'group': 'Branded Food Products Database',
+           'name': 'GRAN SABANA, QUAIL EGGS, UPC: 819140010103',
+           'ndbno': '45169279',
+           'offset': 0\},
+          \{'ds': 'BL',
+           'group': 'Branded Food Products Database',
+           'name': "D'ARTAGNAN, QUAIL EGGS, UPC: 736622102630",
+           'ndbno': '45178254',
+           'offset': 1\},
+          \{'ds': 'BL',
+           'group': 'Branded Food Products Database',
+           'name': 'CHAOKOH, QUAIL EGG IN BRINE, UPC: 044738074186',
+           'ndbno': '45094707',
+           'offset': 2\},
+          \{'ds': 'BL',
+           'group': 'Branded Food Products Database',
+           'name': 'L\&W, QUAIL EGGS, UPC: 024072000256',
+           'ndbno': '45094890',
+           'offset': 3\},
+          \{'ds': 'BL',
+           'group': 'Branded Food Products Database',
+           'name': 'BUDDHA, QUAIL EGGS IN BRINE, UPC: 761934535098',
+           'ndbno': '45099560',
+           'offset': 4\},
+          \{'ds': 'SR',
+           'group': 'Dairy and Egg Products',
+           'name': 'Egg, quail, whole, fresh, raw',
+           'ndbno': '01140',
+           'offset': 5\}]
+\end{Verbatim}
+            
+    \textbf{Exercise 1.2} (20 pts)
+
+Use your search function to get NDB numbers for the foods in the
+\texttt{fresh.csv} file. It's okay if you don't get an NDB number for
+every food, but try to come up with a strategy that gets most of them.
+Discuss your strategy in a short paragraph.
+
+Hints:
+
+\begin{itemize}
+\tightlist
+\item
+  The foods are all raw and unbranded.
+\item
+  You can test search terms with the
+  \href{https://ndb.nal.usda.gov/ndb/search/list}{online search page}.
+\item
+  You can convert the output of \texttt{ndb\_search()} to a data frame
+  with \texttt{pd.DataFrame()}.
+\item
+  The string methods for
+  \href{https://docs.python.org/2/library/stdtypes.html\#string-methods}{Python}
+  and
+  \href{http://pandas.pydata.org/pandas-docs/stable/text.html\#method-summary}{Pandas}
+  are useful here. It's okay if you use \emph{simple} regular
+  expressions in the Pandas methods, although this exercise can be
+  solved without them.
+\item
+  You can merge data frames that have a column in common with
+  \texttt{pd.merge()}.
+\end{itemize}
+
+    \textbf{My strategy:} 1. First I use str.replace() function to replace
+\texttt{\textquotesingle{}\_\textquotesingle{}} by \texttt{blank\ space}
+at the \texttt{"name"} column of \texttt{"fresh.csv"}, then most of them
+are able to be found out. 2. I directly add
+\texttt{\textquotesingle{}raw\textquotesingle{}} after each food name as
+the \texttt{"Search\ terms"} parameter, and set the
+\texttt{"datasource"} parameter to be \texttt{"Standard\ Reference"}
+regarding to that foods are unbranded. 3. I create a blank data frame:
+\texttt{"df"}, then I use a \texttt{"for\ loop"} to get the final data
+frame. In the for loop, an \texttt{"if"} statement is used to deal with
+food cannot be found. That is to say, when the return value is
+\texttt{an\ empty\ list}, I append a row with \texttt{"NaN"} to
+\texttt{"df"}; for the other case, when the food is found, I only append
+the row whose \texttt{"offset"} is \texttt{"0"} to \texttt{"df"}.
+Finally I reset the row index of \texttt{"df"} to get the
+\texttt{"df\_fnl"}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n}{data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fresh.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{data}\PY{o}{.}\PY{n}{food}\PY{p}{:}
+             \PY{n}{x} \PY{o}{=} \PY{n}{ndb\PYZus{}search}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ raw}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{datasource}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Standard Reference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{ignore\PYZus{}index} \PY{o}{=} \PY{n+nb+bp}{True}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{temp} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{temp} \PY{o}{=} \PY{n}{temp}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{temp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{offset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}fnl} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{df\PYZus{}fnl}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:}      ds                              group  \textbackslash{}
+         0    SR            Fruits and Fruit Juices   
+         1    SR            Fruits and Fruit Juices   
+         2    SR            Fruits and Fruit Juices   
+         3    SR            Fruits and Fruit Juices   
+         4    SR            Fruits and Fruit Juices   
+         5    SR            Fruits and Fruit Juices   
+         6    SR            Fruits and Fruit Juices   
+         7    SR            Fruits and Fruit Juices   
+         8    SR            Fruits and Fruit Juices   
+         9    SR            Fruits and Fruit Juices   
+         10   SR            Fruits and Fruit Juices   
+         11   SR            Fruits and Fruit Juices   
+         12  NaN                                NaN   
+         13   SR            Fruits and Fruit Juices   
+         14   SR            Fruits and Fruit Juices   
+         15   SR            Fruits and Fruit Juices   
+         16   SR            Fruits and Fruit Juices   
+         17   SR            Fruits and Fruit Juices   
+         18   SR            Fruits and Fruit Juices   
+         19   SR            Fruits and Fruit Juices   
+         20   SR            Fruits and Fruit Juices   
+         21   SR            Fruits and Fruit Juices   
+         22   SR            Fruits and Fruit Juices   
+         23   SR            Fruits and Fruit Juices   
+         24   SR  Vegetables and Vegetable Products   
+         25   SR  Vegetables and Vegetable Products   
+         26   SR  Vegetables and Vegetable Products   
+         27   SR  Vegetables and Vegetable Products   
+         28   SR  Vegetables and Vegetable Products   
+         29   SR  Vegetables and Vegetable Products   
+         30   SR  Vegetables and Vegetable Products   
+         31   SR  Vegetables and Vegetable Products   
+         32   SR  Vegetables and Vegetable Products   
+         33   SR  Vegetables and Vegetable Products   
+         34   SR  Vegetables and Vegetable Products   
+         35   SR  Vegetables and Vegetable Products   
+         36   SR  Vegetables and Vegetable Products   
+         37   SR  Vegetables and Vegetable Products   
+         38   SR  Vegetables and Vegetable Products   
+         39   SR  Vegetables and Vegetable Products   
+         40   SR  Vegetables and Vegetable Products   
+         41   SR  Vegetables and Vegetable Products   
+         42   SR            Fruits and Fruit Juices   
+         43   SR  Vegetables and Vegetable Products   
+         44   SR  Vegetables and Vegetable Products   
+         45   SR  Vegetables and Vegetable Products   
+         46   SR  Vegetables and Vegetable Products   
+         47   SR  Vegetables and Vegetable Products   
+         48   SR  Vegetables and Vegetable Products   
+         
+                                                         name  ndbno  offset  
+         0                                    Watermelon, raw  09326     0.0  
+         1                            Melons, cantaloupe, raw  09181     0.0  
+         2                               Tangerine juice, raw  09221     0.0  
+         3                                  Strawberries, raw  09316     0.0  
+         4                                         Plums, raw  09279     0.0  
+         5                Oranges, raw, California, valencias  09201     0.0  
+         6                                   Raspberries, raw  09302     0.0  
+         7                                  Pomegranates, raw  09286     0.0  
+         8                      Pineapple, raw, all varieties  09266     0.0  
+         9                                      Apricots, raw  09021     0.0  
+         10                             Melons, honeydew, raw  09184     0.0  
+         11                                      Papayas, raw  09226     0.0  
+         12                                               NaN    NaN     NaN  
+         13                    Pitanga, (surinam-cherry), raw  09276     0.0  
+         14                                      Bananas, raw  09040     0.0  
+         15                            Apples, raw, with skin  09003     0.0  
+         16                              Peaches, yellow, raw  09236     0.0  
+         17                                   Nectarines, raw  09191     0.0  
+         18                                        Pears, raw  09252     0.0  
+         19                Grapefruit, raw, white, California  09117     0.0  
+         20                                 Blackberries, raw  09042     0.0  
+         21                            Grapes, muscadine, raw  09129     0.0  
+         22                                  Blueberries, raw  09050     0.0  
+         23                                       Mangos, raw  09176     0.0  
+         24                                    Asparagus, raw  11011     0.0  
+         25                             Cucumber, peeled, raw  11206     0.0  
+         26                             Cucumber, peeled, raw  11206     0.0  
+         27  Lettuce, iceberg (includes crisphead types), raw  11252     0.0  
+         28                                       Onions, raw  11282     0.0  
+         29                                Turnip greens, raw  11568     0.0  
+         30                               Mustard greens, raw  11270     0.0  
+         31                               Potatoes, raw, skin  11362     0.0  
+         32                                     Collards, raw  11161     0.0  
+         33                           Beans, snap, green, raw  11052     0.0  
+         34                        Squash, winter, acorn, raw  11482     0.0  
+         35                          Peppers, sweet, red, raw  11821     0.0  
+         36               Swamp cabbage, (skunk cabbage), raw  11503     0.0  
+         37               Swamp cabbage, (skunk cabbage), raw  11503     0.0  
+         38                     Sweet potato, raw, unprepared  11507     0.0  
+         39                      Squash, summer, scallop, raw  11475     0.0  
+         40                                     Radishes, raw  11429     0.0  
+         41                    Squash, winter, butternut, raw  11485     0.0  
+         42                         Avocados, raw, California  09038     0.0  
+         43                                         Kale, raw  11233     0.0  
+         44                         Jerusalem-artichokes, raw  11226     0.0  
+         45                                         Okra, raw  11278     0.0  
+         46                        Peppers, sweet, green, raw  11333     0.0  
+         47                             Brussels sprouts, raw  11098     0.0  
+         48                           Corn, sweet, white, raw  11900     0.0  
+\end{Verbatim}
+            
+    \textbf{Exercise 1.3} (20 pts)
+
+Read the
+\href{https://ndb.nal.usda.gov/ndb/doc/apilist/API-FOOD-REPORTV2.md}{food
+reports V2 documentation}, then write a function called
+\texttt{ndb\_report()} that requests a \emph{basic} food report. The
+function should accept the NDB number as an argument and return the list
+of nutrients for the food.
+
+Note that the report url is:
+\texttt{https://api.nal.usda.gov/ndb/V2/reports}
+
+For example, for \texttt{"09279"} (raw plums) the first element of the
+returned list should be:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}\StringTok{u'group'}\NormalTok{: }\StringTok{u'Proximates'}\NormalTok{,}
+ \StringTok{u'measures'}\NormalTok{: [\{}\StringTok{u'eqv'}\NormalTok{: }\FloatTok{165.0}\NormalTok{,}
+   \StringTok{u'eunit'}\NormalTok{: }\StringTok{u'g'}\NormalTok{,}
+   \StringTok{u'label'}\NormalTok{: }\StringTok{u'cup, sliced'}\NormalTok{,}
+   \StringTok{u'qty'}\NormalTok{: }\FloatTok{1.0}\NormalTok{,}
+   \StringTok{u'value'}\NormalTok{: }\StringTok{u'143.93'}\NormalTok{\},}
+\NormalTok{  \{}\StringTok{u'eqv'}\NormalTok{: }\FloatTok{66.0}\NormalTok{,}
+   \StringTok{u'eunit'}\NormalTok{: }\StringTok{u'g'}\NormalTok{,}
+   \StringTok{u'label'}\NormalTok{: }\StringTok{u'fruit (2-1/8" dia)'}\NormalTok{,}
+   \StringTok{u'qty'}\NormalTok{: }\FloatTok{1.0}\NormalTok{,}
+   \StringTok{u'value'}\NormalTok{: }\StringTok{u'57.57'}\NormalTok{\},}
+\NormalTok{  \{}\StringTok{u'eqv'}\NormalTok{: }\FloatTok{151.0}\NormalTok{,}
+   \StringTok{u'eunit'}\NormalTok{: }\StringTok{u'g'}\NormalTok{,}
+   \StringTok{u'label'}\NormalTok{: }\StringTok{u'NLEA serving'}\NormalTok{,}
+   \StringTok{u'qty'}\NormalTok{: }\FloatTok{1.0}\NormalTok{,}
+   \StringTok{u'value'}\NormalTok{: }\StringTok{u'131.72'}\NormalTok{\}],}
+ \StringTok{u'name'}\NormalTok{: }\StringTok{u'Water'}\NormalTok{,}
+ \StringTok{u'nutrient_id'}\NormalTok{: }\StringTok{u'255'}\NormalTok{,}
+ \StringTok{u'unit'}\NormalTok{: }\StringTok{u'g'}\NormalTok{,}
+ \StringTok{u'value'}\NormalTok{: }\StringTok{u'87.23'}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+Be sure to document and test your function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{ndb\PYZus{}uri}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.nal.usda.gov/ndb/V2/reports?format=json\PYZam{}api\PYZus{}key=\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{key}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{ndb\PYZus{}report}\PY{p}{(}\PY{n}{ndb}\PY{p}{)}\PY{p}{:}
+             \PY{n}{respon} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{ndb\PYZus{}uri}\PY{p}{,} \PY{n}{params}\PY{o}{=}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ndbno}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{ndb}\PY{p}{,}
+             \PY{p}{\PYZcb{}}\PY{p}{)}
+             \PY{n}{res\PYZus{}json} \PY{o}{=} \PY{n}{respon}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{error}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{res\PYZus{}json}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{foods}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{res\PYZus{}dict}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{res\PYZus{}dict}\PY{o}{=}\PY{n}{res\PYZus{}json}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{foods}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nutrients}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{derivation}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{res\PYZus{}dict}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{res\PYZus{}dict}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                         \PY{k}{del} \PY{n}{res\PYZus{}dict}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{derivation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{k}{return} \PY{n}{res\PYZus{}dict}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{ndb\PYZus{}report}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{09279}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} [\{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '143.93'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '57.57'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '131.72'\}],
+           'name': 'Water',
+           'nutrient\_id': '255',
+           'unit': 'g',
+           'value': '87.23'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '76'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '30'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '69'\}],
+           'name': 'Energy',
+           'nutrient\_id': '208',
+           'unit': 'kcal',
+           'value': '46'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '1.15'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.46'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '1.06'\}],
+           'name': 'Protein',
+           'nutrient\_id': '203',
+           'unit': 'g',
+           'value': '0.70'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.46'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.18'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.42'\}],
+           'name': 'Total lipid (fat)',
+           'nutrient\_id': '204',
+           'unit': 'g',
+           'value': '0.28'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '18.84'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '7.54'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '17.24'\}],
+           'name': 'Carbohydrate, by difference',
+           'nutrient\_id': '205',
+           'unit': 'g',
+           'value': '11.42'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '2.3'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.9'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '2.1'\}],
+           'name': 'Fiber, total dietary',
+           'nutrient\_id': '291',
+           'unit': 'g',
+           'value': '1.4'\},
+          \{'group': 'Proximates',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '16.37'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '6.55'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '14.98'\}],
+           'name': 'Sugars, total',
+           'nutrient\_id': '269',
+           'unit': 'g',
+           'value': '9.92'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '10'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '4'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '9'\}],
+           'name': 'Calcium, Ca',
+           'nutrient\_id': '301',
+           'unit': 'mg',
+           'value': '6'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.28'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.11'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.26'\}],
+           'name': 'Iron, Fe',
+           'nutrient\_id': '303',
+           'unit': 'mg',
+           'value': '0.17'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '12'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '5'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '11'\}],
+           'name': 'Magnesium, Mg',
+           'nutrient\_id': '304',
+           'unit': 'mg',
+           'value': '7'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '26'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '11'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '24'\}],
+           'name': 'Phosphorus, P',
+           'nutrient\_id': '305',
+           'unit': 'mg',
+           'value': '16'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '259'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '104'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '237'\}],
+           'name': 'Potassium, K',
+           'nutrient\_id': '306',
+           'unit': 'mg',
+           'value': '157'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0'\}],
+           'name': 'Sodium, Na',
+           'nutrient\_id': '307',
+           'unit': 'mg',
+           'value': '0'\},
+          \{'group': 'Minerals',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.17'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.07'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.15'\}],
+           'name': 'Zinc, Zn',
+           'nutrient\_id': '309',
+           'unit': 'mg',
+           'value': '0.10'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '15.7'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '6.3'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '14.3'\}],
+           'name': 'Vitamin C, total ascorbic acid',
+           'nutrient\_id': '401',
+           'unit': 'mg',
+           'value': '9.5'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.046'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.018'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.042'\}],
+           'name': 'Thiamin',
+           'nutrient\_id': '404',
+           'unit': 'mg',
+           'value': '0.028'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.043'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.017'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.039'\}],
+           'name': 'Riboflavin',
+           'nutrient\_id': '405',
+           'unit': 'mg',
+           'value': '0.026'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.688'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.275'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.630'\}],
+           'name': 'Niacin',
+           'nutrient\_id': '406',
+           'unit': 'mg',
+           'value': '0.417'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.048'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.019'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.044'\}],
+           'name': 'Vitamin B-6',
+           'nutrient\_id': '415',
+           'unit': 'mg',
+           'value': '0.029'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '8'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '3'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '8'\}],
+           'name': 'Folate, DFE',
+           'nutrient\_id': '435',
+           'unit': 'µg',
+           'value': '5'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.00'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.00'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.00'\}],
+           'name': 'Vitamin B-12',
+           'nutrient\_id': '418',
+           'unit': 'µg',
+           'value': '0.00'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '28'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '11'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '26'\}],
+           'name': 'Vitamin A, RAE',
+           'nutrient\_id': '320',
+           'unit': 'µg',
+           'value': '17'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '569'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '228'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '521'\}],
+           'name': 'Vitamin A, IU',
+           'nutrient\_id': '318',
+           'unit': 'IU',
+           'value': '345'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.43'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.17'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.39'\}],
+           'name': 'Vitamin E (alpha-tocopherol)',
+           'nutrient\_id': '323',
+           'unit': 'mg',
+           'value': '0.26'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.0'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.0'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.0'\}],
+           'name': 'Vitamin D (D2 + D3)',
+           'nutrient\_id': '328',
+           'unit': 'µg',
+           'value': '0.0'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0'\}],
+           'name': 'Vitamin D',
+           'nutrient\_id': '324',
+           'unit': 'IU',
+           'value': '0'\},
+          \{'group': 'Vitamins',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '10.6'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '4.2'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '9.7'\}],
+           'name': 'Vitamin K (phylloquinone)',
+           'nutrient\_id': '430',
+           'unit': 'µg',
+           'value': '6.4'\},
+          \{'group': 'Lipids',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.028'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.011'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.026'\}],
+           'name': 'Fatty acids, total saturated',
+           'nutrient\_id': '606',
+           'unit': 'g',
+           'value': '0.017'\},
+          \{'group': 'Lipids',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.221'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.088'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.202'\}],
+           'name': 'Fatty acids, total monounsaturated',
+           'nutrient\_id': '645',
+           'unit': 'g',
+           'value': '0.134'\},
+          \{'group': 'Lipids',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.073'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.029'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.066'\}],
+           'name': 'Fatty acids, total polyunsaturated',
+           'nutrient\_id': '646',
+           'unit': 'g',
+           'value': '0.044'\},
+          \{'group': 'Lipids',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0.000'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0.000'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0.000'\}],
+           'name': 'Fatty acids, total trans',
+           'nutrient\_id': '605',
+           'unit': 'g',
+           'value': '0.000'\},
+          \{'group': 'Lipids',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0'\}],
+           'name': 'Cholesterol',
+           'nutrient\_id': '601',
+           'unit': 'mg',
+           'value': '0'\},
+          \{'group': 'Other',
+           'measures': [\{'eqv': 165.0,
+             'eunit': 'g',
+             'label': 'cup, sliced',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 66.0,
+             'eunit': 'g',
+             'label': 'fruit (2-1/8" dia)',
+             'qty': 1.0,
+             'value': '0'\},
+            \{'eqv': 151.0,
+             'eunit': 'g',
+             'label': 'NLEA serving',
+             'qty': 1.0,
+             'value': '0'\}],
+           'name': 'Caffeine',
+           'nutrient\_id': '262',
+           'unit': 'mg',
+           'value': '0'\}]
+\end{Verbatim}
+            
+    \textbf{Exercise 1.4} (20 pts) Which foods provide the best combination
+of price, yield, and nutrition? You can use kilocalories as a measure of
+"nutrition" here, but more a detailed analysis is better. Use plots to
+support your analysis.
+
+    \textbf{Answer:}
+
+From the question, in order to use \texttt{kilocalories} as a measure of
+\texttt{"nutrition"} of foods, I select the second element of
+\texttt{ndb\_report()} returned list to get the \texttt{Energy} value
+(whose unit is \texttt{kcal}) of each food, then I get the \texttt{kcal}
+table with only one column shown the
+\texttt{Energy\ Value\ per\ 100\ g}.
+
+Next I concrate the table of \texttt{fresh.csv}, the table from
+\textbf{Exercise 1.2} and the \texttt{kcal} table to get the
+\textbf{\texttt{fnl}} table.
+
+From The USDA Food Composition Databases, it states that
+\texttt{"Nutrient\ values\ and\ weights\ are\ for}
+\textbf{\texttt{edible\ portion}}\texttt{"}. Therefore, it is reasonable
+for us to use the following formula as a standard to compare the best
+combination of price, yield and nutrition:
+
+\(Standard = \frac{price\,per\,100\,g}{Yield \,\times \,Energy\,Value\,per\,100\,g}\)
+
+Where \(price\,per\,100\,g\) can be derived from \(price\,per\,lb\).
+(\textbf{\texttt{100\ g\ =\ 0.22\ lbs}})
+
+Then the \(Standard\) tells us \texttt{the\ price\ of\ per\ kcl} for
+each food, the lowest ones are those provide the best combination of
+price, yield and nutrition.
+
+Upon this analysis, by viewing the below
+\textbf{\texttt{Price\ per\ Kcal\ Comparation}} graph, we can conclude
+that \texttt{"bananas"}, \texttt{"potatoes"}, \texttt{"sweet\ potatoes"}
+and \texttt{"avocados"} tend to provide the best combination of price,
+yield and nutrition.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{c+c1}{\PYZsh{} get the kcal table with only one column shown the Energy Value per 100 g}
+         
+         \PY{n}{kcal}\PY{o}{=}\PY{p}{[}\PY{p}{]}        
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{df\PYZus{}fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ndbno}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{item} \PY{o}{=} \PY{n}{ndb\PYZus{}report}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+             \PY{k}{if} \PY{n}{item} \PY{o}{==} \PY{p}{[}\PY{p}{]}\PY{p}{:}
+                 \PY{n}{kcal}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NaN}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{kcal}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{item}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{kcal} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{kcal}\PY{p}{,}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy\PYZus{}value\PYZus{}per\PYZus{}100g\PYZus{}(kcal)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{c+c1}{\PYZsh{} concrate the table of fresh.csv, the table from Exercise 1.2 and the kcal table}
+         
+         \PY{n}{fnl} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{data}\PY{p}{,} \PY{n}{df\PYZus{}fnl}\PY{p}{,} \PY{n}{kcal}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fnl} \PY{o}{=} \PY{n}{fnl}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{form}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ds}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{group}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{offset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{fnl}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:}     price\_per\_lb     yield  lb\_per\_cup  price\_per\_cup              food  \textbackslash{}
+         0       0.333412  0.520000    0.330693       0.212033        watermelon   
+         1       0.535874  0.510000    0.374786       0.393800        cantaloupe   
+         2       1.377962  0.740000    0.407855       0.759471        tangerines   
+         3       2.358808  0.940000    0.319670       0.802171      strawberries   
+         4       1.827416  0.940000    0.363763       0.707176             plums   
+         5       1.035173  0.730000    0.407855       0.578357           oranges   
+         6       6.975811  0.960000    0.319670       2.322874       raspberries   
+         7       2.173590  0.560000    0.341717       1.326342       pomegranate   
+         8       0.627662  0.510000    0.363763       0.447686         pineapple   
+         9       3.040072  0.930000    0.363763       1.189102          apricots   
+         10      0.796656  0.460000    0.374786       0.649077          honeydew   
+         11      1.298012  0.620000    0.308647       0.646174            papaya   
+         12      2.044683  0.760000    0.385809       1.037970              kiwi   
+         13      3.592990  0.920000    0.341717       1.334548          cherries   
+         14      0.566983  0.640000    0.330693       0.292965           bananas   
+         15      1.567515  0.900000    0.242508       0.422373            apples   
+         16      1.591187  0.960000    0.341717       0.566390           peaches   
+         17      1.761148  0.910000    0.319670       0.618667        nectarines   
+         18      1.461575  0.900000    0.363763       0.590740             pears   
+         19      0.897802  0.490000    0.462971       0.848278        grapefruit   
+         20      5.774708  0.960000    0.319670       1.922919      blackberries   
+         21      2.093827  0.960000    0.330693       0.721266            grapes   
+         22      4.734622  0.950000    0.319670       1.593177       blueberries   
+         23      1.377563  0.710000    0.363763       0.705783           mangoes   
+         24      3.213494  0.493835    0.396832       2.582272         asparagus   
+         25      1.295931  0.970000    0.264555       0.353448         cucumbers   
+         26      1.295931  0.730000    0.264555       0.469650         cucumbers   
+         27      1.213039  0.950000    0.242508       0.309655   lettuce iceberg   
+         28      1.038107  0.900000    0.352740       0.406868            onions   
+         29      2.471749  0.750000    0.319670       1.053526     turnip greens   
+         30      2.569235  0.840000    0.308647       0.944032    mustard greens   
+         31      0.564320  0.811301    0.264555       0.184017          potatoes   
+         32      2.630838  1.160000    0.286601       0.650001    collard greens   
+         33      2.139972  0.846575    0.275578       0.696606       green beans   
+         34      1.172248  0.458554    0.451948       1.155360      acorn squash   
+         35      2.277940  0.820000    0.264555       0.734926       red peppers   
+         36      0.579208  0.778797    0.330693       0.245944           cabbage   
+         37      1.056450  0.779107    0.330693       0.448412           cabbage   
+         38      0.918897  0.811301    0.440925       0.499400    sweet potatoes   
+         39      1.639477  0.769500    0.396832       0.845480     summer squash   
+         40      1.311629  0.900000    0.275578       0.401618            radish   
+         41      1.244737  0.714000    0.451948       0.787893  butternut squash   
+         42      2.235874  0.740753    0.319670       0.964886          avocados   
+         43      2.807302  1.050000    0.286601       0.766262              kale   
+         44      2.213050  0.375309    0.385809       2.274967         artichoke   
+         45      3.213552  0.769474    0.352740       1.473146              okra   
+         46      1.410363  0.820000    0.264555       0.455022     green peppers   
+         47      2.763553  1.060000    0.341717       0.890898  brussels sprouts   
+         48      2.690623  0.540000    0.363763       1.812497        corn sweet   
+         
+                                                         name  ndbno  \textbackslash{}
+         0                                    Watermelon, raw  09326   
+         1                            Melons, cantaloupe, raw  09181   
+         2                               Tangerine juice, raw  09221   
+         3                                  Strawberries, raw  09316   
+         4                                         Plums, raw  09279   
+         5                Oranges, raw, California, valencias  09201   
+         6                                   Raspberries, raw  09302   
+         7                                  Pomegranates, raw  09286   
+         8                      Pineapple, raw, all varieties  09266   
+         9                                      Apricots, raw  09021   
+         10                             Melons, honeydew, raw  09184   
+         11                                      Papayas, raw  09226   
+         12                                               NaN    NaN   
+         13                    Pitanga, (surinam-cherry), raw  09276   
+         14                                      Bananas, raw  09040   
+         15                            Apples, raw, with skin  09003   
+         16                              Peaches, yellow, raw  09236   
+         17                                   Nectarines, raw  09191   
+         18                                        Pears, raw  09252   
+         19                Grapefruit, raw, white, California  09117   
+         20                                 Blackberries, raw  09042   
+         21                            Grapes, muscadine, raw  09129   
+         22                                  Blueberries, raw  09050   
+         23                                       Mangos, raw  09176   
+         24                                    Asparagus, raw  11011   
+         25                             Cucumber, peeled, raw  11206   
+         26                             Cucumber, peeled, raw  11206   
+         27  Lettuce, iceberg (includes crisphead types), raw  11252   
+         28                                       Onions, raw  11282   
+         29                                Turnip greens, raw  11568   
+         30                               Mustard greens, raw  11270   
+         31                               Potatoes, raw, skin  11362   
+         32                                     Collards, raw  11161   
+         33                           Beans, snap, green, raw  11052   
+         34                        Squash, winter, acorn, raw  11482   
+         35                          Peppers, sweet, red, raw  11821   
+         36               Swamp cabbage, (skunk cabbage), raw  11503   
+         37               Swamp cabbage, (skunk cabbage), raw  11503   
+         38                     Sweet potato, raw, unprepared  11507   
+         39                      Squash, summer, scallop, raw  11475   
+         40                                     Radishes, raw  11429   
+         41                    Squash, winter, butternut, raw  11485   
+         42                         Avocados, raw, California  09038   
+         43                                         Kale, raw  11233   
+         44                         Jerusalem-artichokes, raw  11226   
+         45                                         Okra, raw  11278   
+         46                        Peppers, sweet, green, raw  11333   
+         47                             Brussels sprouts, raw  11098   
+         48                           Corn, sweet, white, raw  11900   
+         
+            Energy\_value\_per\_100g\_(kcal)  
+         0                            30  
+         1                            34  
+         2                            43  
+         3                            32  
+         4                            46  
+         5                            49  
+         6                            52  
+         7                            83  
+         8                            50  
+         9                            48  
+         10                           36  
+         11                           43  
+         12                          NaN  
+         13                           33  
+         14                           89  
+         15                           52  
+         16                           39  
+         17                           44  
+         18                           57  
+         19                           37  
+         20                           43  
+         21                           57  
+         22                           57  
+         23                           60  
+         24                           20  
+         25                           12  
+         26                           12  
+         27                           14  
+         28                           40  
+         29                           32  
+         30                           27  
+         31                           58  
+         32                           32  
+         33                           31  
+         34                           40  
+         35                           31  
+         36                           19  
+         37                           19  
+         38                           86  
+         39                           18  
+         40                           16  
+         41                           45  
+         42                          167  
+         43                           49  
+         44                           73  
+         45                           33  
+         46                           20  
+         47                           43  
+         48                           86  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{c+c1}{\PYZsh{} remove rows with \PYZdq{}NaN\PYZdq{}}
+         
+         \PY{n}{fnl} \PY{o}{=} \PY{p}{(}\PY{n}{fnl}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{any}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{thresh}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{subset}\PY{o}{=}\PY{n+nb+bp}{None}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{n+nb+bp}{False}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{n+nb+bp}{True}\PY{p}{)}
+         \PY{n}{fnl}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:}     price\_per\_lb     yield  lb\_per\_cup  price\_per\_cup              food  \textbackslash{}
+         0       0.333412  0.520000    0.330693       0.212033        watermelon   
+         1       0.535874  0.510000    0.374786       0.393800        cantaloupe   
+         2       1.377962  0.740000    0.407855       0.759471        tangerines   
+         3       2.358808  0.940000    0.319670       0.802171      strawberries   
+         4       1.827416  0.940000    0.363763       0.707176             plums   
+         5       1.035173  0.730000    0.407855       0.578357           oranges   
+         6       6.975811  0.960000    0.319670       2.322874       raspberries   
+         7       2.173590  0.560000    0.341717       1.326342       pomegranate   
+         8       0.627662  0.510000    0.363763       0.447686         pineapple   
+         9       3.040072  0.930000    0.363763       1.189102          apricots   
+         10      0.796656  0.460000    0.374786       0.649077          honeydew   
+         11      1.298012  0.620000    0.308647       0.646174            papaya   
+         12      3.592990  0.920000    0.341717       1.334548          cherries   
+         13      0.566983  0.640000    0.330693       0.292965           bananas   
+         14      1.567515  0.900000    0.242508       0.422373            apples   
+         15      1.591187  0.960000    0.341717       0.566390           peaches   
+         16      1.761148  0.910000    0.319670       0.618667        nectarines   
+         17      1.461575  0.900000    0.363763       0.590740             pears   
+         18      0.897802  0.490000    0.462971       0.848278        grapefruit   
+         19      5.774708  0.960000    0.319670       1.922919      blackberries   
+         20      2.093827  0.960000    0.330693       0.721266            grapes   
+         21      4.734622  0.950000    0.319670       1.593177       blueberries   
+         22      1.377563  0.710000    0.363763       0.705783           mangoes   
+         23      3.213494  0.493835    0.396832       2.582272         asparagus   
+         24      1.295931  0.970000    0.264555       0.353448         cucumbers   
+         25      1.295931  0.730000    0.264555       0.469650         cucumbers   
+         26      1.213039  0.950000    0.242508       0.309655   lettuce iceberg   
+         27      1.038107  0.900000    0.352740       0.406868            onions   
+         28      2.471749  0.750000    0.319670       1.053526     turnip greens   
+         29      2.569235  0.840000    0.308647       0.944032    mustard greens   
+         30      0.564320  0.811301    0.264555       0.184017          potatoes   
+         31      2.630838  1.160000    0.286601       0.650001    collard greens   
+         32      2.139972  0.846575    0.275578       0.696606       green beans   
+         33      1.172248  0.458554    0.451948       1.155360      acorn squash   
+         34      2.277940  0.820000    0.264555       0.734926       red peppers   
+         35      0.579208  0.778797    0.330693       0.245944           cabbage   
+         36      1.056450  0.779107    0.330693       0.448412           cabbage   
+         37      0.918897  0.811301    0.440925       0.499400    sweet potatoes   
+         38      1.639477  0.769500    0.396832       0.845480     summer squash   
+         39      1.311629  0.900000    0.275578       0.401618            radish   
+         40      1.244737  0.714000    0.451948       0.787893  butternut squash   
+         41      2.235874  0.740753    0.319670       0.964886          avocados   
+         42      2.807302  1.050000    0.286601       0.766262              kale   
+         43      2.213050  0.375309    0.385809       2.274967         artichoke   
+         44      3.213552  0.769474    0.352740       1.473146              okra   
+         45      1.410363  0.820000    0.264555       0.455022     green peppers   
+         46      2.763553  1.060000    0.341717       0.890898  brussels sprouts   
+         47      2.690623  0.540000    0.363763       1.812497        corn sweet   
+         
+                                                         name  ndbno  \textbackslash{}
+         0                                    Watermelon, raw  09326   
+         1                            Melons, cantaloupe, raw  09181   
+         2                               Tangerine juice, raw  09221   
+         3                                  Strawberries, raw  09316   
+         4                                         Plums, raw  09279   
+         5                Oranges, raw, California, valencias  09201   
+         6                                   Raspberries, raw  09302   
+         7                                  Pomegranates, raw  09286   
+         8                      Pineapple, raw, all varieties  09266   
+         9                                      Apricots, raw  09021   
+         10                             Melons, honeydew, raw  09184   
+         11                                      Papayas, raw  09226   
+         12                    Pitanga, (surinam-cherry), raw  09276   
+         13                                      Bananas, raw  09040   
+         14                            Apples, raw, with skin  09003   
+         15                              Peaches, yellow, raw  09236   
+         16                                   Nectarines, raw  09191   
+         17                                        Pears, raw  09252   
+         18                Grapefruit, raw, white, California  09117   
+         19                                 Blackberries, raw  09042   
+         20                            Grapes, muscadine, raw  09129   
+         21                                  Blueberries, raw  09050   
+         22                                       Mangos, raw  09176   
+         23                                    Asparagus, raw  11011   
+         24                             Cucumber, peeled, raw  11206   
+         25                             Cucumber, peeled, raw  11206   
+         26  Lettuce, iceberg (includes crisphead types), raw  11252   
+         27                                       Onions, raw  11282   
+         28                                Turnip greens, raw  11568   
+         29                               Mustard greens, raw  11270   
+         30                               Potatoes, raw, skin  11362   
+         31                                     Collards, raw  11161   
+         32                           Beans, snap, green, raw  11052   
+         33                        Squash, winter, acorn, raw  11482   
+         34                          Peppers, sweet, red, raw  11821   
+         35               Swamp cabbage, (skunk cabbage), raw  11503   
+         36               Swamp cabbage, (skunk cabbage), raw  11503   
+         37                     Sweet potato, raw, unprepared  11507   
+         38                      Squash, summer, scallop, raw  11475   
+         39                                     Radishes, raw  11429   
+         40                    Squash, winter, butternut, raw  11485   
+         41                         Avocados, raw, California  09038   
+         42                                         Kale, raw  11233   
+         43                         Jerusalem-artichokes, raw  11226   
+         44                                         Okra, raw  11278   
+         45                        Peppers, sweet, green, raw  11333   
+         46                             Brussels sprouts, raw  11098   
+         47                           Corn, sweet, white, raw  11900   
+         
+            Energy\_value\_per\_100g\_(kcal)  
+         0                            30  
+         1                            34  
+         2                            43  
+         3                            32  
+         4                            46  
+         5                            49  
+         6                            52  
+         7                            83  
+         8                            50  
+         9                            48  
+         10                           36  
+         11                           43  
+         12                           33  
+         13                           89  
+         14                           52  
+         15                           39  
+         16                           44  
+         17                           57  
+         18                           37  
+         19                           43  
+         20                           57  
+         21                           57  
+         22                           60  
+         23                           20  
+         24                           12  
+         25                           12  
+         26                           14  
+         27                           40  
+         28                           32  
+         29                           27  
+         30                           58  
+         31                           32  
+         32                           31  
+         33                           40  
+         34                           31  
+         35                           19  
+         36                           19  
+         37                           86  
+         38                           18  
+         39                           16  
+         40                           45  
+         41                          167  
+         42                           49  
+         43                           73  
+         44                           33  
+         45                           20  
+         46                           43  
+         47                           86  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} add a new column which shows the \PYZdq{}Standard\PYZdq{} (price per kcal) to \PYZdq{}fnl\PYZdq{}}
+         
+         \PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy\PYZus{}value\PYZus{}per\PYZus{}100g\PYZus{}(kcal)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}numeric}\PY{p}{(}\PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy\PYZus{}value\PYZus{}per\PYZus{}100g\PYZus{}(kcal)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price per kcal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price\PYZus{}per\PYZus{}lb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*} \PY{l+m+mf}{0.22} \PY{o}{/}\PY{p}{(}\PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{yield}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{n}{fnl}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy\PYZus{}value\PYZus{}per\PYZus{}100g\PYZus{}(kcal)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fnl}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:}     price\_per\_lb     yield  lb\_per\_cup  price\_per\_cup              food  \textbackslash{}
+         0       0.333412  0.520000    0.330693       0.212033        watermelon   
+         1       0.535874  0.510000    0.374786       0.393800        cantaloupe   
+         2       1.377962  0.740000    0.407855       0.759471        tangerines   
+         3       2.358808  0.940000    0.319670       0.802171      strawberries   
+         4       1.827416  0.940000    0.363763       0.707176             plums   
+         5       1.035173  0.730000    0.407855       0.578357           oranges   
+         6       6.975811  0.960000    0.319670       2.322874       raspberries   
+         7       2.173590  0.560000    0.341717       1.326342       pomegranate   
+         8       0.627662  0.510000    0.363763       0.447686         pineapple   
+         9       3.040072  0.930000    0.363763       1.189102          apricots   
+         10      0.796656  0.460000    0.374786       0.649077          honeydew   
+         11      1.298012  0.620000    0.308647       0.646174            papaya   
+         12      3.592990  0.920000    0.341717       1.334548          cherries   
+         13      0.566983  0.640000    0.330693       0.292965           bananas   
+         14      1.567515  0.900000    0.242508       0.422373            apples   
+         15      1.591187  0.960000    0.341717       0.566390           peaches   
+         16      1.761148  0.910000    0.319670       0.618667        nectarines   
+         17      1.461575  0.900000    0.363763       0.590740             pears   
+         18      0.897802  0.490000    0.462971       0.848278        grapefruit   
+         19      5.774708  0.960000    0.319670       1.922919      blackberries   
+         20      2.093827  0.960000    0.330693       0.721266            grapes   
+         21      4.734622  0.950000    0.319670       1.593177       blueberries   
+         22      1.377563  0.710000    0.363763       0.705783           mangoes   
+         23      3.213494  0.493835    0.396832       2.582272         asparagus   
+         24      1.295931  0.970000    0.264555       0.353448         cucumbers   
+         25      1.295931  0.730000    0.264555       0.469650         cucumbers   
+         26      1.213039  0.950000    0.242508       0.309655   lettuce iceberg   
+         27      1.038107  0.900000    0.352740       0.406868            onions   
+         28      2.471749  0.750000    0.319670       1.053526     turnip greens   
+         29      2.569235  0.840000    0.308647       0.944032    mustard greens   
+         30      0.564320  0.811301    0.264555       0.184017          potatoes   
+         31      2.630838  1.160000    0.286601       0.650001    collard greens   
+         32      2.139972  0.846575    0.275578       0.696606       green beans   
+         33      1.172248  0.458554    0.451948       1.155360      acorn squash   
+         34      2.277940  0.820000    0.264555       0.734926       red peppers   
+         35      0.579208  0.778797    0.330693       0.245944           cabbage   
+         36      1.056450  0.779107    0.330693       0.448412           cabbage   
+         37      0.918897  0.811301    0.440925       0.499400    sweet potatoes   
+         38      1.639477  0.769500    0.396832       0.845480     summer squash   
+         39      1.311629  0.900000    0.275578       0.401618            radish   
+         40      1.244737  0.714000    0.451948       0.787893  butternut squash   
+         41      2.235874  0.740753    0.319670       0.964886          avocados   
+         42      2.807302  1.050000    0.286601       0.766262              kale   
+         43      2.213050  0.375309    0.385809       2.274967         artichoke   
+         44      3.213552  0.769474    0.352740       1.473146              okra   
+         45      1.410363  0.820000    0.264555       0.455022     green peppers   
+         46      2.763553  1.060000    0.341717       0.890898  brussels sprouts   
+         47      2.690623  0.540000    0.363763       1.812497        corn sweet   
+         
+                                                         name  ndbno  \textbackslash{}
+         0                                    Watermelon, raw  09326   
+         1                            Melons, cantaloupe, raw  09181   
+         2                               Tangerine juice, raw  09221   
+         3                                  Strawberries, raw  09316   
+         4                                         Plums, raw  09279   
+         5                Oranges, raw, California, valencias  09201   
+         6                                   Raspberries, raw  09302   
+         7                                  Pomegranates, raw  09286   
+         8                      Pineapple, raw, all varieties  09266   
+         9                                      Apricots, raw  09021   
+         10                             Melons, honeydew, raw  09184   
+         11                                      Papayas, raw  09226   
+         12                    Pitanga, (surinam-cherry), raw  09276   
+         13                                      Bananas, raw  09040   
+         14                            Apples, raw, with skin  09003   
+         15                              Peaches, yellow, raw  09236   
+         16                                   Nectarines, raw  09191   
+         17                                        Pears, raw  09252   
+         18                Grapefruit, raw, white, California  09117   
+         19                                 Blackberries, raw  09042   
+         20                            Grapes, muscadine, raw  09129   
+         21                                  Blueberries, raw  09050   
+         22                                       Mangos, raw  09176   
+         23                                    Asparagus, raw  11011   
+         24                             Cucumber, peeled, raw  11206   
+         25                             Cucumber, peeled, raw  11206   
+         26  Lettuce, iceberg (includes crisphead types), raw  11252   
+         27                                       Onions, raw  11282   
+         28                                Turnip greens, raw  11568   
+         29                               Mustard greens, raw  11270   
+         30                               Potatoes, raw, skin  11362   
+         31                                     Collards, raw  11161   
+         32                           Beans, snap, green, raw  11052   
+         33                        Squash, winter, acorn, raw  11482   
+         34                          Peppers, sweet, red, raw  11821   
+         35               Swamp cabbage, (skunk cabbage), raw  11503   
+         36               Swamp cabbage, (skunk cabbage), raw  11503   
+         37                     Sweet potato, raw, unprepared  11507   
+         38                      Squash, summer, scallop, raw  11475   
+         39                                     Radishes, raw  11429   
+         40                    Squash, winter, butternut, raw  11485   
+         41                         Avocados, raw, California  09038   
+         42                                         Kale, raw  11233   
+         43                         Jerusalem-artichokes, raw  11226   
+         44                                         Okra, raw  11278   
+         45                        Peppers, sweet, green, raw  11333   
+         46                             Brussels sprouts, raw  11098   
+         47                           Corn, sweet, white, raw  11900   
+         
+             Energy\_value\_per\_100g\_(kcal)  price per kcal  
+         0                             30        0.004702  
+         1                             34        0.006799  
+         2                             43        0.009527  
+         3                             32        0.017252  
+         4                             46        0.009298  
+         5                             49        0.006367  
+         6                             52        0.030743  
+         7                             83        0.010288  
+         8                             50        0.005415  
+         9                             48        0.014982  
+         10                            36        0.010584  
+         11                            43        0.010711  
+         12                            33        0.026036  
+         13                            89        0.002190  
+         14                            52        0.007369  
+         15                            39        0.009350  
+         16                            44        0.009677  
+         17                            57        0.006268  
+         18                            37        0.010894  
+         19                            43        0.030776  
+         20                            57        0.008418  
+         21                            57        0.019236  
+         22                            60        0.007114  
+         23                            20        0.071579  
+         24                            12        0.024494  
+         25                            12        0.032546  
+         26                            14        0.020065  
+         27                            40        0.006344  
+         28                            32        0.022658  
+         29                            27        0.024922  
+         30                            58        0.002638  
+         31                            32        0.015592  
+         32                            31        0.017939  
+         33                            40        0.014060  
+         34                            31        0.019715  
+         35                            19        0.008612  
+         36                            19        0.015701  
+         37                            86        0.002897  
+         38                            18        0.026040  
+         39                            16        0.020039  
+         40                            45        0.008523  
+         41                           167        0.003976  
+         42                            49        0.012004  
+         43                            73        0.017771  
+         44                            33        0.027842  
+         45                            20        0.018919  
+         46                            43        0.013339  
+         47                            86        0.012746  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} plot the comparation graph (where there are lines in \PYZdq{}cabbages\PYZdq{} and \PYZdq{}cucumbers\PYZdq{} because of the repeated rows in \PYZdq{}fresh.csv\PYZdq{})}
+         
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k+kn}{as} \PY{n+nn}{sns}
+         
+         \PY{n}{fnl\PYZus{}plot} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{melt}\PY{p}{(}\PY{n}{fnl}\PY{p}{,} \PY{n}{id\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{value\PYZus{}vars}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price per kcal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fnl\PYZus{}plot} \PY{o}{=} \PY{n}{fnl\PYZus{}plot}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{whitegrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mf}{11.7}\PY{p}{,} \PY{l+m+mf}{11.27}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{=}\PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{food}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data}\PY{o}{=}\PY{n}{fnl\PYZus{}plot}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price per Kcal Comparation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Price\PYZus{}per\PYZus{}kcal}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Food}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plot}\PY{o}{.}\PY{n}{tick\PYZus{}params}\PY{p}{(}\PY{n}{labelsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_22_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
